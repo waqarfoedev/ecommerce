@@ -107,3 +107,8 @@ try {
     })
 }  
 }
+
+// test cntriloler
+export const testController=(req, res)=>{
+    res.send('Route protected')
+}
