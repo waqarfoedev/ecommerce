@@ -1,11 +1,19 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-function Footer() {
+const Footer = ()=> {
   return (
-    <div className='bg-dark text-light p-3'>
+    <div className='footer'>
       <h4 className='text-center'>All Right Reserved &copy; WAQAR DEV</h4>
+      <p className='text-center mt-3'>
+        <Link to='/about'>About</Link> |
+        <Link to='/policy'>Privacy Policy</Link> |
+        <Link to='/contact'>Contact</Link>
+      </p>
     </div>
   )
 }
 
 export default Footer
+
+
