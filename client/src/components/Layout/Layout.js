@@ -2,10 +2,12 @@ import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import { Helmet } from 'react-helmet';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = ({ children, title, description, Keywords, author }) => {
   return (
-    <div>
+    <>
       <Helmet>
         <meta charSet='utf-8' />
         <meta name='description' content={description} />
@@ -14,11 +16,12 @@ const Layout = ({ children, title, description, Keywords, author }) => {
         <title>{title}</title>
       </Helmet>
       <Header />
-      <main style={{ minHeight: "70vh" }}>
+      <main style={{ minHeight: "60vh" }}>
+        <ToastContainer />
         <h1>{children}</h1>
       </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
