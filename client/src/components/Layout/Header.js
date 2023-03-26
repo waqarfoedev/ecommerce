@@ -5,7 +5,7 @@ import { HiOutlineShoppingCart } from 'react-icons/hi';
 
 const Header = () => {
   return (
-    <div>
+    <>
 
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
@@ -37,7 +37,7 @@ const Header = () => {
         </div>
       </nav>
 
-    </div>
+    </>
 
   );
 };

@@ -8,21 +8,19 @@ import 'react-toastify/dist/ReactToastify.css';
 const Layout = ({ children, title, description, Keywords, author }) => {
   return (
     <div>
-      <Layout title="Register - Ecommer App">
-        <Helmet>
-          {/* <meta charSet='utf-8' /> */}
-          <meta name='description' content={description} />
-          <meta name='Keywords' content={Keywords} />
-          <meta name='author' content={author} />
-          <title>{title}</title>
-        </Helmet>
-        <Header />
-        <main style={{ minHeight: "60vh" }}>
-          <ToastContainer />
-          <h1>{children}</h1>
-        </main>
-        <Footer />
-      </Layout>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <meta name='description' content={description} />
+        <meta name='Keywords' content={Keywords} />
+        <meta name='author' content={author} />
+        <title>{title}</title>
+      </Helmet>
+      <Header />
+      <main style={{ minHeight: "70vh" }}>
+        <ToastContainer />
+        <h1>{children}</h1>
+      </main>
+      <Footer />
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Layout from '../../components/Layout/Layout';
-// import axios from 'axios';
+import axios from 'axios';
 import "../../styles/AuthStyles.css";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -12,23 +12,24 @@ const Register = () => {
     const [password, setPassword] = useState();
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
-    // const navigate = useNavigate('');
+    const navigate = useNavigate('');
 
     const onSubmit = async (e) => {
         e.preventDefault();
         const valuee = { username, email, password, phone, address };
         console.log(valuee);
-        // try {
-        //     const res = await axios.post(`${process.env.REACT_APP_LOCALH}/api/v1/auth/register`, valuee);
-        //     if (res.data.success) {
-        //         toast("Register successfully");
-        //         navigate('/login');
-        //     } else {
-        //         toast.error("Something went wrong");
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
+
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_LOCALH}/api/v1/auth/register`, valuee);
+            if (res.data.success) {
+                toast("Register successfully");
+                navigate('/login');
+            } else {
+                toast.error("Something went wrong");
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <Layout title={"Register"}>
@@ -38,7 +39,7 @@ const Register = () => {
                     <div className="mb-3">
                         <input type="text"
                             required
-                            // autoFocus
+                            autoFocus
                             className="form-control"
                             placeholder='Enter your name'
                             value={username}
