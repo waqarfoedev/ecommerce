@@ -53,7 +53,7 @@
 
 .footer {
   color: white;
-  padding: 25px;
+  padding: 20px;
   background: #000000; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
@@ -106,7 +106,7 @@
 /* ========================================= */
 /* =========contact us ========= */
 .contactus {
-  margin: 0;
+  margin: 10px 0 0 0;
   padding: 0;
   font-size: 16px;
   font-family: "Poppins", sans-serif;

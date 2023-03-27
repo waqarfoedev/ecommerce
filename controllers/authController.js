@@ -58,15 +58,15 @@ export const loginController = async (req, res) => {
         const { email, password } = req.body;
         //validation
         if (!email || !password) {
-            return res.status(404).send({
+            return res.status(200).send({
                 success: false,
-                error: "Invalid email or password"
+                message: "Invalid email or password"
             });
         }
         //check user
         const userr = await userModel.findOne({ email });
         if (!userr) {
-            return res.status(404).send({
+            return res.status(200).send({
                 success: false,
                 message: 'Email not register'
             });
@@ -86,7 +86,7 @@ export const loginController = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "7d" });
 
-        res.status(200).send({
+        res.status(201).send({
             success: true,
             message: "login successfully",
             user: {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 import Layout from '../../components/Layout/Layout';
 import axios from 'axios';
 import "../../styles/AuthStyles.css";
@@ -22,7 +22,7 @@ const Register = () => {
         try {
             const res = await axios.post(`${process.env.REACT_APP_LOCALH}/api/v1/auth/register`, valuee);
             if (res.data.success) {
-                toast("Register successfully");
+                toast.success("Register successfully");
                 navigate('/login');
             } else {
                 toast.error("Something went wrong");
