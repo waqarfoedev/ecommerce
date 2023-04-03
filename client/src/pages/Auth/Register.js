@@ -20,7 +20,7 @@ const Register = () => {
         console.log(valuee);
 
         try {
-            const res = await axios.post(`${process.env.REACT_APP_LOCALH}/api/v1/auth/register`, valuee);
+            const res = await axios.post(`/api/v1/auth/register`, valuee);
             if (res.data.success) {
                 toast.success("Register successfully");
                 navigate('/login');

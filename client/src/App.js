@@ -6,6 +6,8 @@ import Policy from './pages/Policy';
 import Contact from './pages/Contact';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
+import Private from './components/Routes/Private';
+import Dashboard from './pages/user/Dashboard';
 
 
 function App() {
@@ -13,6 +15,9 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/dashboard' element={<Private />}>
+          <Route path='' element={<Dashboard />} />
+        </Route>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
         <Route path='/contact' element={<Contact />} />
