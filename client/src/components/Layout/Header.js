@@ -40,9 +40,19 @@ const Header = () => {
                 <li className="nav-item">
                   <NavLink to="/login" className="nav-link" >Login</NavLink>
                 </li></>) : (<>
-                  <li className="nav-item">
-                    <NavLink onClick={handleLogout} to="/login" className="nav-link" >Logout</NavLink>
-                  </li></>)}
+                  <li className="nav-item dropdown">
+                    <NavLink className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {auth?.user?.username}
+                    </NavLink>
+                    <ul className="dropdown-menu">
+                      <li><NavLink to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : 'user'}`} className="dropdown-item" >Dashbaord</NavLink></li>
+                      <li>
+                        <NavLink onClick={handleLogout} to="/login" className="dropdown-item" >Logout</NavLink>
+                      </li>
+                    </ul>
+                  </li>
+
+                </>)}
               <li className="nav-item">
                 <NavLink to="/cart" className="nav-link" >Cart (0)</NavLink>
               </li>
