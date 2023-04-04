@@ -8,6 +8,7 @@ import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import Private from './components/Routes/Private';
 import Dashboard from './pages/user/Dashboard';
+import ForgotPassword from './pages/Auth/ForgotPassword';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path='' element={<Dashboard />} />
         </Route>
         <Route path='/register' element={<Register />} />
+        <Route path='/forget-password' element={<ForgotPassword />} />
         <Route path='/login' element={<Login />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/about' element={<About />} />

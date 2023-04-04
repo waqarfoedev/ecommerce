@@ -12,11 +12,12 @@ const Register = () => {
     const [password, setPassword] = useState();
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [answer, setAnswer] = useState('');
     const navigate = useNavigate('');
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const valuee = { username, email, password, phone, address };
+        const valuee = { username, email, password, phone, address, answer };
         console.log(valuee);
 
         try {
@@ -78,6 +79,14 @@ const Register = () => {
                             value={address}
                             onChange={(e) =>
                                 setAddress(e.target.value)} />
+                    </div>
+                    <div className="mb-3">
+                        <input type="text"
+                            required className="form-control"
+                            placeholder='Enter your favorite city'
+                            value={answer}
+                            onChange={(e) =>
+                                setAnswer(e.target.value)} />
                     </div>
                     <button type="submit" required className="btn btn-primary">Submit</button>
                 </form>

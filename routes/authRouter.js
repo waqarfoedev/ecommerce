@@ -1,5 +1,10 @@
 import express from "express";
-import { registerController, testController, loginController } from '../controllers/authController.js';
+import {
+    registerController,
+    testController,
+    loginController,
+    forgetPasswordController
+} from '../controllers/authController.js';
 import { isAdmin, requireSignIn } from "../middelwares/middelwares.js";
 
 //router object
@@ -19,5 +24,8 @@ router.get('/test', requireSignIn, isAdmin, testController);
 router.get('/user-auth', requireSignIn, (req, res) => {
     res.status(200).send({ ok: true });
 });
+
+//forget password route auth
+router.post('/forget-password', forgetPasswordController);
 
 export default router;
