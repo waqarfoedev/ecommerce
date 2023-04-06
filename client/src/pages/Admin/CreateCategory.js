@@ -1,12 +1,10 @@
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import AdminMenu from '../../components/Layout/AdminMenu';
-import { useAuth } from '../../context/auth';
 
-const AdminDashboard = () => {
-    const [auth] = useAuth();
+const CreateCategory = () => {
     return (
-        <Layout title='Admin-Dashboard'>
+        <Layout title='Dashboard-Create Category'>
             <div className='cotainer-fluid m-3 p-3'>
                 <div className='row'>
                     <div className='col-md-3'>
@@ -14,9 +12,7 @@ const AdminDashboard = () => {
                     </div>
                     <div className='col-md-9'>
                         <div className='card w-75 p-3'>
-                            <h3>Admin name: {auth?.user?.username}</h3>
-                            <h3>Admin email: {auth?.user?.email}</h3>
-                            <h3>Admin contact no: {auth?.user?.phone}</h3>
+                            <h1>Create Category</h1>
                         </div>
                     </div>
 
@@ -27,4 +23,4 @@ const AdminDashboard = () => {
     );
 };
 
-export default AdminDashboard;
+export default CreateCategory;
