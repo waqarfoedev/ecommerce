@@ -1,6 +1,8 @@
 import categoryMoel from "../models/categoryMoel.js";
 import slugify from "slugify";
 
+
+// create category controller
 export const createCategoryController = async (req, res) => {
     try {
         const { name } = req.body;
@@ -36,5 +38,26 @@ export const createCategoryController = async (req, res) => {
             error
         });
 
+    }
+};
+
+// update category controller
+export const updateCategoryController = async (req, res) => {
+    try {
+        const { name } = req.body;
+        const { id } = req.params;
+        const category = await categoryMoel.findByIdAndUpdate(id, { name, slug: slugify(name) }, { new: true });
+        res.status(200).send({
+            success: true,
+            message: "category update successfully",
+            category
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error while updating",
+            error
+        });
     }
 };
