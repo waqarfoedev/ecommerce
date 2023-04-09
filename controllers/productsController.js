@@ -31,7 +31,7 @@ export const createProductsController = async (req, res) => {
         }
         await products.save();
 
-        res.status(200).send({
+        res.status(201).send({
             success: true,
             message: "Products created successfully",
             products,
@@ -129,6 +129,52 @@ export const deleteProductController = async (req, res) => {
         res.status(500).send({
             success: false,
             message: "Error while deleting product",
+            error
+        });
+    }
+};
+
+// update product
+export const updateProductsController = async (req, res) => {
+
+    try {
+        const { name, slug, description, price, category, quantity, shipping } = req.fields;
+        const { photo } = req.files;
+        const { pid } = req.params;
+
+        // validation
+        switch (true) {
+            case !name:
+                return res.status(500).send({ message: "Name is required" });
+            case !description:
+                return res.status(500).send({ message: "Description is required" });
+            case !price:
+                return res.status(500).send({ message: "Price is required" });
+            case !category:
+                return res.status(500).send({ message: "Category is required" });
+            case !quantity:
+                return res.status(500).send({ message: "Quantity is required" });
+            case photo && photo.size > 10000000:
+                return res.status(500).send({ message: "Photo is required and size should be less then 1mb" });
+        }
+
+        const products = await productModels.findByIdAndUpdate(pid, { ...req.fields, slug: slugify(name) }, { new: true });
+        if (photo) {
+            products.photo.data = fs.readFileSync(photo.path);
+            products.photo.contentType = photo.type;
+        }
+        await products.save();
+
+        res.status(201).send({
+            success: true,
+            message: "Products update successfully",
+            products,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Error while updating products",
             error
         });
     }
