@@ -34,7 +34,7 @@ const Products = () => {
             {products?.map((p) => (
               <Link
                 key={p._id}
-                to={`/dashbard/admin/product/${p.slug}`}
+                to={`/dashboard/admin/products/${p.slug}`}
                 className="products-link"
               >
                 <div className="card m-2" style={{ width: "18rem" }}>
