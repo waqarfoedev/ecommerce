@@ -145,3 +145,8 @@
   padding: 20px 0px;
 }
 
+/* ============================ */
+.products-link{
+  text-decoration: none !important;
+  color: black !important;
+}
