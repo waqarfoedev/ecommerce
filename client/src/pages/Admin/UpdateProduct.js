@@ -21,7 +21,7 @@ const UpdateProduct = () => {
   const params = useParams();
 
   // form submition handle
-  const handlecreate = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
@@ -31,14 +31,14 @@ const UpdateProduct = () => {
       productData.append("quantity", quantity);
       photo && productData.append("photo", photo);
       productData.append("category", category);
-      const { data } = axios.post(
-        "/api/v1/products/create-products",
+      const { data } = axios.put(
+        `/api/v1/products/update-products/${id}`,
         productData
       );
       if (data?.success) {
         toast.error(data?.message);
       } else {
-        toast.success("Product successfully created");
+        toast.success("Product successfully Update");
         navigate("/dashboard/admin/products");
       }
     } catch (error) {
@@ -58,7 +58,7 @@ const UpdateProduct = () => {
         setPhoto(data.product.photo);
         setPrice(data.product.price);
         setQuantity(data.product.quantity);
-        setCategory(data.product.category);
+        setCategory(data.product.category._id);
         setId(data.product._id);
       }
     } catch (error) {
@@ -79,15 +79,28 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(
-        "something went wrong during getting categories in CreateProduct"
-      );
+      toast.error("something went wrong during updataing Product");
     }
   };
   useEffect(() => {
     getCategory();
     // eslint-disable-next-line
   }, []);
+
+  // Delete Product
+
+  const handleDelete = async () => {
+    try {
+      const answer = window.prompt("Are you sure want to Delete?");
+      if (!answer) return;
+      await axios.delete(`/api/v1/products/delete-product/${id}`);
+      toast.success(`product ${name} delete successfully`);
+      navigate("/dashboard/admin/products");
+    } catch (error) {
+      console.log(error);
+      toast.error("something went wrong");
+    }
+  };
   return (
     <Layout title="Dashboard-Create Product">
       <div className="container-fluid m-3 p-3">
@@ -107,7 +120,7 @@ const UpdateProduct = () => {
                   placeholder="select a category"
                   size="large"
                   className="form-select mb-3"
-                  value={category.name}
+                  value={category}
                 >
                   {categories?.map((c) => (
                     <Option key={c._id} value={c._id}>
@@ -200,8 +213,13 @@ const UpdateProduct = () => {
                     </Select>
                   </div>
                   <div className="mb-3">
-                    <button className="btn btn-primary" onClick={handlecreate}>
+                    <button className="btn btn-primary" onClick={handleUpdate}>
                       UPDATE PRODUCT
+                    </button>
+                  </div>
+                  <div className="mb-3">
+                    <button className="btn btn-danger" onClick={handleDelete}>
+                      DELETE PRODUCT
                     </button>
                   </div>
                 </div>
