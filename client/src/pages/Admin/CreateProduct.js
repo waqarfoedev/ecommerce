@@ -36,8 +36,8 @@ const CreateProduct = () => {
       if (data?.success) {
         toast.error(data?.message);
       } else {
-        toast.success("Product successfully created");
         navigate("/dashboard/admin/products");
+        toast.success("Product successfully created");
       }
     } catch (error) {
       console.log(error);
@@ -76,6 +76,7 @@ const CreateProduct = () => {
               <div className="m-1 w-75">
                 <Select
                   bordered={false}
+                  showSearch
                   onChange={(value) => {
                     setCategory(value);
                   }}

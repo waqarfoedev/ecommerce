@@ -30,7 +30,7 @@ const Products = () => {
         </div>
         <div className="col-md-9">
           <h1 className="text-center">All Products</h1>
-          <div className="d-flex">
+          <div className="d-flex flex-wrap">
             {products?.map((p) => (
               <Link
                 key={p._id}
@@ -41,12 +41,14 @@ const Products = () => {
                   <img
                     src={`/api/v1/products/product-photo/${p._id}`}
                     className="card-img-top"
+                    height="255px"
                     alt={p.name}
                   />
                   <div className="card-body">
                     <h5 className="card-title">{p.name}</h5>
                     <h6 className="card-title">Rs.{p.price}</h6>
-                    <p className="card-text">{p.description}</p>
+                    <p className="card-text text-truncate">{p.description}</p>
+                    <h6 className="card-title">{p.category.name}</h6>
                   </div>
                 </div>
               </Link>

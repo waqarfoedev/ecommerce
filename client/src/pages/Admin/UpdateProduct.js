@@ -20,7 +20,7 @@ const UpdateProduct = () => {
   const [shipping, setShipping] = useState("");
   const params = useParams();
 
-  // form submition handle
+  // form Update handle
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -31,15 +31,15 @@ const UpdateProduct = () => {
       productData.append("quantity", quantity);
       photo && productData.append("photo", photo);
       productData.append("category", category);
-      const { data } = axios.put(
+      const { data } = await axios.put(
         `/api/v1/products/update-products/${id}`,
         productData
       );
       if (data?.success) {
-        toast.error(data?.message);
-      } else {
-        toast.success("Product successfully Update");
         navigate("/dashboard/admin/products");
+        toast.success("Product successfully Update");
+      } else {
+        toast.error(data?.message);
       }
     } catch (error) {
       console.log(error);
