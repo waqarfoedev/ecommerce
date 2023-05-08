@@ -90,10 +90,12 @@ a
     font-size: 18px;
     color: #020202;
     font-weight: 600;
+    margin-top: -11px;
 }
 
 .product-links {
     text-align: right;
+    
 }
 
 .product-links a {
@@ -107,14 +109,17 @@ a
 .product-links a:hover {
     color: #020202;
 } 
-
+.btnn{
+    margin-bottom: 10px;
+    margin-top: -6px;
+}
   .middle {
     transition: .5s ease;
     opacity: 0;
     position: absolute;
-    bottom: -11%;
-    left: 85%;
-    width: 214px;
+    top: 81%;
+    right: -12%;
+    /* width: 214px; */
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
@@ -127,12 +132,14 @@ a
   .product-tumb:hover .middle {
     opacity: 1;
   }
-  
-  .text {
-    background-color: #000000d0;
+  .pnf-btnn {
+    background-color: rgb(43, 43, 43);
     color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 18px;
-    padding: 14px;
+    text-decoration: none;
+    border-radius: 9px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  .filter{
+    position: fixed;
   }

@@ -81,43 +81,44 @@ const HomePage = () => {
   return (
     <Layout title={"All Products"}>
       <div className="row w-100">
-        <div className="col-md-3">
-          <h4 className="text-center">Filter By Category</h4>
-          <div className="d-flex flex-column">
-            <div className="row ms-3">
-              {categories?.map((p) => (
-                <Checkbox
-                  key={p._id}
-                  onChange={(e) => handleFilter(e.target.checked, p._id)}
-                >
-                  {p.name}
-                </Checkbox>
-              ))}
-            </div>
-          </div>
-          <br />
-          <h4 className="text-center">Filter By Price</h4>
-          <div className="d-flex flex-column">
-            <div className="row ms-3">
-              <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-                {Prices?.map((p) => (
-                  <div key={p._id}>
-                    <Radio value={p.array}>{p.name}</Radio>
-                  </div>
+        <div className="col-md-3 ">
+          <div className="filter  w-25">
+            <h4 className="text-start p-2">Filter By Category</h4>
+            <div className="d-flex flex-column">
+              <div className="row ms-3">
+                {categories?.map((p) => (
+                  <Checkbox
+                    key={p._id}
+                    onChange={(e) => handleFilter(e.target.checked, p._id)}
+                  >
+                    {p.name}
+                  </Checkbox>
                 ))}
-              </Radio.Group>
+              </div>
             </div>
-          </div>
-          <br />
-          <div className="d-flex flex-column">
-            <button
-              className="btn btn-danger ms-4"
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              RESET FILTER
-            </button>
+            <br />
+            <h4 className="text-start p-2">Filter By Price</h4>
+            <div className="d-flex flex-column">
+              <div className="row ms-3">
+                <Radio.Group onChange={(e) => setRadio(e.target.value)}>
+                  {Prices?.map((p) => (
+                    <div key={p._id}>
+                      <Radio value={p.array}>{p.name}</Radio>
+                    </div>
+                  ))}
+                </Radio.Group>
+              </div>
+            </div>
+            <div className="d-flex flex-column">
+              <button
+                className="pnf-btnn"
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                RESET FILTER
+              </button>
+            </div>
           </div>
         </div>
         <div className="col-md-9">
