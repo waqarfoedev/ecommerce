@@ -186,6 +186,7 @@ export const updateProductsController = async (req, res) => {
   }
 };
 
+// filter products
 export const filterProductController = async (req, res) => {
   try {
     const { checked, radio } = req.body;
@@ -207,3 +208,49 @@ export const filterProductController = async (req, res) => {
     });
   }
 };
+
+// Pagination
+
+// product count
+export const productCountController = async (req, res) => {
+  try {
+    const total = await productModels.find({}).estimatedDocumentCount();
+    res.status(200).send({
+      success: true,
+      total,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while getting product count ",
+      error,
+    });
+  }
+};
+
+// product list base on page
+export const productListContrller = async (req, res) => {
+  try {
+    const productPerPage = 6;
+    const page = req.params.page ? req.params.page : 1;
+    const products = await productModels
+      .find({})
+      .select("-photo")
+      .skip((page - 1) * productPerPage)
+      .limit(productPerPage)
+      .sort({ createdAt: -1 });
+    res.status(200).send({
+      success: true,
+      products,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while getting product per page ",
+      error,
+    });
+  }
+};
+//===================

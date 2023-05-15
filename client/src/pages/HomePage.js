@@ -4,13 +4,19 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Layout/Prices";
-import ProductCard from "./Auth/ProductCard";
+// import ProductCard from "./Auth/ProductCard";
+import { MdFavorite } from "react-icons/md";
+import { IoCartSharp } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   // get all category
   const getCategory = async () => {
@@ -25,21 +31,51 @@ const HomePage = () => {
   };
   useEffect(() => {
     getCategory();
+    getTotal();
     // eslint-disable-next-line
   }, []);
 
   //get all products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/products/get-products");
+      setLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setLoading(false);
       setProducts(data.products);
     } catch (error) {
       console.log(error);
       toast.error("something went wrong during getting all products");
     }
   };
+  //======= Pagination ================
 
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/products/product-count");
+      setTotal(data?.total);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (page === 1) return;
+    loadmore();
+  }, [page]);
+
+  const loadmore = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(`/api/v1/products/product-list/${page}`);
+      setLoading(false);
+      setProducts([...products, ...data?.products]);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
   //lifecycle methd
+
   useEffect(() => {
     if (!checked.length || !radio.length) {
       getAllProducts();
@@ -82,7 +118,7 @@ const HomePage = () => {
     <Layout title={"All Products"}>
       <div className="row w-100">
         <div className="col-md-3 ">
-          <div className="filter  w-25">
+          <div className="filter">
             <h4 className="text-start p-2">Filter By Category</h4>
             <div className="d-flex flex-column">
               <div className="row ms-3">
@@ -125,8 +161,49 @@ const HomePage = () => {
           <h1 className="text-center">All Products</h1>
           <div className="d-flex flex-wrap">
             {products?.map((p) => (
-              <ProductCard p={p} />
+              <div className="product-card">
+                <div className="product-tumb">
+                  <img
+                    src={`/api/v1/products/product-photo/${p._id}`}
+                    alt={p.name}
+                  />
+                  <div className="middle">
+                    <div className="product-links">
+                      <a href="#">
+                        <MdFavorite size={35} />
+                      </a>
+                      <a href="#">
+                        <IoCartSharp size={35} />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="product-details">
+                  <span className="product-name">{p.name}</span>
+                  <span className="product-catagory">{p.category.name}</span>
+
+                  <div className="product-bottom-details">
+                    <div className="product-price">${p.price}</div>
+                    <div className="btnn">
+                      <Link className="pnf-btnn ">More Details.</Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
+          </div>
+          <div className="m-2 p-2">
+            {products && products.length < total && (
+              <button
+                className="btn btn-warning"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setPage(page + 1);
+                }}
+              >
+                {loading ? "Loading..." : "Loadmore"}
+              </button>
+            )}
           </div>
         </div>
       </div>
