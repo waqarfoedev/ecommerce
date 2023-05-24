@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { Checkbox, Radio } from "antd";
+import { Checkbox, Radio, Slider } from "antd";
 import { Prices } from "../components/Layout/Prices";
 // import ProductCard from "./Auth/ProductCard";
 import { MdFavorite } from "react-icons/md";

@@ -4,6 +4,7 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { BsBasket2Fill } from "react-icons/bs";
 import { useAuth } from "../../context/auth";
 import { toast } from "react-hot-toast";
+import SearchInput from "../Form/SearchInput";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
@@ -32,30 +33,31 @@ const Header = () => {
             <span className="navbar-toggler-icon" />
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <Link to="/" className="navbar-brand">
+            <Link to="/" className="navbar-brand px-2">
               <HiOutlineShoppingCart />
               <span /> AP_Shop
             </Link>
+            <SearchInput />
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link">
+                <NavLink to="/" className="nav-link  mx-2">
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/category" className="nav-link">
+                <NavLink to="/category" className="nav-link  mx-2">
                   Category
                 </NavLink>
               </li>
               {!auth.user ? (
                 <>
                   <li className="nav-item">
-                    <NavLink to="/register" className="nav-link">
+                    <NavLink to="/register" className="nav-link  mx-2">
                       Register
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink to="/login" className="nav-link">
+                    <NavLink to="/login" className="nav-link  mx-2">
                       Login
                     </NavLink>
                   </li>
@@ -64,7 +66,7 @@ const Header = () => {
                 <>
                   <li className="nav-item dropdown">
                     <NavLink
-                      className="nav-link dropdown-toggle"
+                      className="nav-link dropdown-toggle mx-2"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -96,7 +98,7 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <NavLink to="/cart" className="nav-link">
+                <NavLink to="/cart" className="nav-link mx-4">
                   <BsBasket2Fill />
                 </NavLink>
               </li>
