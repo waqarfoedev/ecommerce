@@ -4,12 +4,12 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Checkbox, Radio, Slider } from "antd";
 import { Prices } from "../components/Layout/Prices";
-// import ProductCard from "./Auth/ProductCard";
 import { MdFavorite } from "react-icons/md";
 import { IoCartSharp } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -185,7 +185,9 @@ const HomePage = () => {
                   <div className="product-bottom-details">
                     <div className="product-price">${p.price}</div>
                     <div className="btnn">
-                      <Link className="pnf-btnn ">More Details.</Link>
+                      <Link to={`/product/${p.slug}`} className="pnf-btnn ">
+                        More Details.
+                      </Link>
                     </div>
                   </div>
                 </div>
