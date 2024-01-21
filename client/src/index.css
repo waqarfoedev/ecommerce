@@ -297,3 +297,20 @@ a
   /* .filter{
     position: fixed;
   } */
+
+  /* ----------------add to cart -------- */
+
+  .notification {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .notification .badge {
+    position: absolute;
+    top: -8.5px;
+    right: -8.5px;
+    padding: 3px 3px;
+    border-radius: 50%;
+    background: rgb(0, 0, 0);
+    color: white;
+  }

@@ -5,9 +5,11 @@ import { BsBasket2Fill } from "react-icons/bs";
 import { useAuth } from "../../context/auth";
 import { toast } from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
+import useCategory from "../../hooks/useCategory";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
+  const categories = useCategory();
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -40,15 +42,42 @@ const Header = () => {
             <SearchInput />
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link  mx-2">
+                <NavLink to="/" className="nav-link">
                   Home
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink to="/category" className="nav-link  mx-2">
-                  Category
-                </NavLink>
-              </li>
+
+              {/* ------------------------- */}
+              <>
+                <li className="nav-item dropdown">
+                  <NavLink
+                    className="nav-link dropdown-toggle mx-2"
+                    data-bs-toggle="dropdown"
+                    to={"/category"}
+                  >
+                    Category
+                  </NavLink>
+
+                  <ul className="dropdown-menu">
+                    <li>
+                      <NavLink to={`/categories`} className="dropdown-item">
+                        All Category
+                      </NavLink>
+                    </li>
+                    {categories?.map((c) => (
+                      <li>
+                        <NavLink
+                          to={`/categories/${c.slug}`}
+                          className="dropdown-item"
+                        >
+                          {c.name}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </>
+              {/* --------------------------- */}
               {!auth.user ? (
                 <>
                   <li className="nav-item">
@@ -97,14 +126,13 @@ const Header = () => {
                   </li>
                 </>
               )}
-              <li className="nav-item">
-                <NavLink to="/cart" className="nav-link mx-4">
-                  <BsBasket2Fill />
-                </NavLink>
-              </li>
             </ul>
           </div>
         </div>
+        <NavLink to="/cart" className="nav-link mx-4 notification">
+          <BsBasket2Fill />
+          <span className="badge">3</span>
+        </NavLink>
       </nav>
     </>
   );
