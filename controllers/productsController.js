@@ -1,5 +1,6 @@
 import fs from "fs";
 import productModels from "../models/productModels.js";
+import categoryMoel from "../models/categoryMoel.js"
 import slugify from "slugify";
 
 export const createProductsController = async (req, res) => {
@@ -291,6 +292,26 @@ export const relatedProductController = async (req, res) => {
     res.status(400).send({
       success: false,
       message: "Error while getting related product ",
+      error,
+    });
+  }
+};
+
+export const productCategoryController = async (req, res) => {
+  try {
+   const category = await categoryMoel.findOne({slug: req.params.slug})
+   const products= await productModels.find({category}).populate("category")
+
+   res.status(200).send({
+    success: true,
+    category,
+    products
+   })
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({
+      success: false,
+      message: "Error while getting product category",
       error,
     });
   }

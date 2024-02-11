@@ -7,9 +7,10 @@ import { Prices } from "../components/Layout/Prices";
 import { MdFavorite } from "react-icons/md";
 import { IoCartSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "../context/cart";
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -17,6 +18,7 @@ const HomePage = () => {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [cart, setCart]=useCart()
 
   // get all category
   const getCategory = async () => {
@@ -173,7 +175,10 @@ const HomePage = () => {
                         <MdFavorite size={35} />
                       </a>
                       <a href="#">
-                        <IoCartSharp size={35} />
+                        <IoCartSharp size={35} onClick={()=> 
+                          {setCart([...cart, p]);
+                        }
+                          } />
                       </a>
                     </div>
                   </div>

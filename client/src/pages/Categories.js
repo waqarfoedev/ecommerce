@@ -3,22 +3,24 @@ import React from "react";
 import useCategory from "../hooks/useCategory";
 import { Link } from "react-router-dom";
 
-function Categories() {
-  const categories = useCategory();
+
+const Categories = () => {
+  const cate = useCategory();
   return (
     <Layout title={"All Categories"}>
       <div className="container">
         <div className="row">
-          {categories?.map((c) => {
-            <h3 style={{ color: "black" }} className="btn btn-primary">
+          {cate.map((c) => (
+           <div className="col-md-6 mt-5 mb-3 gx-3 gy-3" id={c._id}>
+             <Link to={`/category/${c.slug}`} className="btn btn-dark">
               {c.name}
-              {console.log(c.name)}
-            </h3>;
-          })}
+            </Link>
+           </div>
+       ))} 
         </div>
       </div>
     </Layout>
-  );
+  )
 }
 
-export default Categories;
+export default Categories

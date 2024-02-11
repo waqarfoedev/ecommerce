@@ -6,10 +6,12 @@ import { useAuth } from "../../context/auth";
 import { toast } from "react-hot-toast";
 import SearchInput from "../Form/SearchInput";
 import useCategory from "../../hooks/useCategory";
+import { useCart } from "../../context/cart";
 
 const Header = () => {
   const [auth, setAuth] = useAuth();
   const categories = useCategory();
+  const [cart]=useCart()
   const handleLogout = () => {
     setAuth({
       ...auth,
@@ -67,7 +69,7 @@ const Header = () => {
                     {categories?.map((c) => (
                       <li>
                         <NavLink
-                          to={`/categories/${c.slug}`}
+                          to={`/category/${c.slug}`}
                           className="dropdown-item"
                         >
                           {c.name}
@@ -131,7 +133,7 @@ const Header = () => {
         </div>
         <NavLink to="/cart" className="nav-link mx-4 notification">
           <BsBasket2Fill />
-          <span className="badge">3</span>
+          <span className="badge">{(cart?.length)===0 ? "" : cart?.length}</span>
         </NavLink>
       </nav>
     </>
